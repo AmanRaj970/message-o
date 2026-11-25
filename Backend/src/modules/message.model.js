@@ -25,4 +25,4 @@ const userSchema = new mongoose.Schema({
 
 const Message = mongoose.model('Message', userSchema);
 
-export default Message;
+module.exports = Message;
