@@ -21,6 +21,10 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));    
 
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'OK' });
+} );
+
 if (fs.existsSync(publicdir)) {
     app.use(express.static(publicdir));
 
@@ -38,4 +42,8 @@ app.use(clerkMiddleware());
 app.listen(port, () => {
     connectDB();
     console.log(`Server is running on port ${port}`);
+    if (process.env.NODE_ENV === 'production') {
+        const job = require('./lib/cron.js').default;
+        job.start();
+    }
 });
