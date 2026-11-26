@@ -1,5 +1,5 @@
 const express = require ('express');
-const clerkMiddleware = require('@clerk/express');
+const { clerkMiddleware } = require("@clerk/express");
 const dotenv = require('dotenv');
 const connectDB = require('./lib/db.js');
 const cors = require('cors');
@@ -17,6 +17,7 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));    
 
+app.use(clerkMiddleware());
 
 
 
